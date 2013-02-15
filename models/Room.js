@@ -1,13 +1,12 @@
 var mongoose = require('mongoose'), Schema = mongoose.Schema
-var Room = require('User')
 
 var RoomSchema = new Schema({
 	name: String, 
 	clock: Number, 
 	locked: Boolean, 
-	room_inhabitants: [User]
+	room_inhabitants: []
 });
 
-var User = mongoose.model('User', UserSchema);
+var Room = mongoose.model('Room', RoomSchema);
 
-module.exports = User;
+module.exports = Room;
