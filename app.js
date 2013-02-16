@@ -44,6 +44,7 @@ app.get('/users/delete_all', user.delete_all);
 // PUTS
 app.post('/login', Facebook.loginRequired(), user.login);
 app.post('/logout', Facebook.loginRequired(), user.logout);
+app.post('/room/new', Facebook.loginRequired(), room.create);
 
 
 http.createServer(app).listen(app.get('port'), function(){

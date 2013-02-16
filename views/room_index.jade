@@ -11,4 +11,24 @@ block content
     form(name="logout-form", action="/logout", method="post")
       input(type="submit", value="Log out of Account")
     form(name="create-room-form", action="/room/new", method="post")
+         | Room name
+         br
+         input(type="text", name="room_name")
+         br
+         | Valid for
+         br
+         input(type="text", name="valid_for")
+         br
+         | Locked Group
+         input(type="checkbox", name="locked")
+         br
          input(type="submit", value="Create new Room")
+
+    div(id="room-list")
+        each room, i in rooms
+            div(value=room, id="room_id")
+                b #{room.name}
+                br 
+                | #{room.clock}
+                | #{room.locked}
+                | #{room.room_inhabitants}

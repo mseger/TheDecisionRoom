@@ -1,4 +1,5 @@
 var User = require('../models/user')
+var Room = require('../models/room')
 
 // login a new user, start a new session
 exports.login = function (req, res) {
