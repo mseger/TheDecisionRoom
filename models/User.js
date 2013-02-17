@@ -4,7 +4,6 @@ var UserSchema = new Schema({
 	name: String, 
 	profPicURL: String, 
 	friends: [], 
-	my_rooms: []
 });
 
 var User = mongoose.model('User', UserSchema);

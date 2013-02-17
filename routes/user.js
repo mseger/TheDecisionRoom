@@ -32,7 +32,9 @@ exports.logout = function(req, res){
 // delete all users
 exports.delete_all = function(req, res){
 	// clears out your list so you can start from scratch
-	FBUser.remove({}, function(err) { 
+	User.remove({}, function(err) { 
+		if(err)
+			console.log("Error deleting all users");
    		console.log('collection removed');
    		res.redirect('/');
 	});

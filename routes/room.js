@@ -3,7 +3,6 @@ var Room = require('../models/room')
 
 exports.main = function(req, res){
 	if(req.session.user !== null){
-		console.log(req.session.user);
 		var rooms = Room.find({}).exec(function (err, docs){
 			if(err)
 				return console.log("Couldn't retrieve your rooms");
@@ -41,4 +40,14 @@ exports.create = function(req, res){
 		// will have to trigger an alert or something to tell user here
 		console.log("Room already exists.");
 	};
+};
+
+// delete all rooms
+exports.delete_all = function(req, res){
+	// clears out your list so you can start from scratch
+	Room.remove({}, function(err) { 
+		if(err)
+			console.log("Unable to delete rooms");
+		res.redirect('/room_index');
+	});
 };

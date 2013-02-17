@@ -32,3 +32,5 @@ block content
                 | #{room.clock}
                 | #{room.locked}
                 | #{room.room_inhabitants}
+                each inhabitant, i in room.room_inhabitants
+                    li #{room.room_inhabitants[i].name}

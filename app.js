@@ -40,6 +40,7 @@ app.get('/login', Facebook.loginRequired(), user.login);
 app.get('/room_index', Facebook.loginRequired(), room.index);
 app.get('/room/:room_id', Facebook.loginRequired(), room.main);
 app.get('/users/delete_all', user.delete_all);
+app.get('/rooms/delete_all', Facebook.loginRequired(), room.delete_all);
 
 // PUTS
 app.post('/login', Facebook.loginRequired(), user.login);
