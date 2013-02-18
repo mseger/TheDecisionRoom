@@ -3,10 +3,10 @@ var Room = require('../models/room')
 
 exports.main = function(req, res){
 	if(req.session.user !== null){
-		var rooms = Room.find({}).exec(function (err, docs){
+		var rooms = Room.findOne({_id: req.params.room_id}).exec(function (err, room){
 			if(err)
 				return console.log("Couldn't retrieve your rooms");
-			res.render('room', {title: "Welcome to your room.", curr_user: req.session.user, rooms: docs});
+			res.render('room', {title: "Welcome to your room.", curr_user: req.session.user, curr_room: room});
 		})
 	}else{
 		res.redirect('/');
@@ -34,7 +34,7 @@ exports.create = function(req, res){
 		newRoom.save(function (err){
 			if (err)
 				console.log("Error creating new room");
-			res.redirect('/room/' + newRoom._id);
+			res.render('/room/' + newRoom._id, {title: req.body.room_name, curr_user: req.session.user, curr_room: newRoom});
 		})
 	}else{
 		// will have to trigger an alert or something to tell user here
