@@ -1,9 +1,21 @@
 extends layout
 
 block content
-  div(value= curr_room, id="welcome-to-room-dialog")
-    h1 Welcome to #{curr_room.name}
-    br
-    br
-    form(name="logout-form", action="/logout", method="post")
-      input(type="submit", value="Log out of Account")
+	div.row
+		div.span6(value= curr_room, id="welcome-to-room-dialog")
+			h1 Welcome to #{curr_room.name}
+			br
+			br
+			form(name="logout-form", action="/logout", method="post")
+				input(type="submit", value="Log out of Account")
+		div.span6(id="yelp-search")
+			form(name="yelp-criteria", action="/yelp", method="get")
+				| Search for 
+				label Category: 
+				input(type="text", name="category")
+				label City: 
+				input(type="text", name="city")
+				input(type="submit", value="Submit")
+
+
+		include _yelp_results

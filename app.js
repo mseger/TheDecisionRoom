@@ -41,7 +41,7 @@ app.get('/room_index', Facebook.loginRequired(), room.index);
 app.get('/room/:room_id', Facebook.loginRequired(), room.main);
 app.get('/users/delete_all', user.delete_all);
 app.get('/rooms/delete_all', Facebook.loginRequired(), room.delete_all);
-app.get('/yelp', user.display_yelp_results);
+app.get('/yelp', room.display_yelp_results);
 
 // PUTS
 app.post('/login', Facebook.loginRequired(), user.login);

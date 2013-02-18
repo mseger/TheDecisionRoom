@@ -6,7 +6,7 @@ exports.main = function(req, res){
 		var rooms = Room.findOne({_id: req.params.room_id}).exec(function (err, room){
 			if(err)
 				return console.log("Couldn't retrieve your rooms");
-			res.render('room', {title: "Welcome to your room.", curr_user: req.session.user, curr_room: room});
+			res.render('room', {title: "Welcome to your room.", curr_user: req.session.user, curr_room: room, yelp_results: []});
 		})
 	}else{
 		res.redirect('/');
@@ -34,7 +34,7 @@ exports.create = function(req, res){
 		newRoom.save(function (err){
 			if (err)
 				console.log("Error creating new room");
-			res.render('/room/' + newRoom._id, {title: req.body.room_name, curr_user: req.session.user, curr_room: newRoom});
+			res.render('/room/' + newRoom._id, {title: req.body.room_name, curr_user: req.session.user, curr_room: newRoom, yelp_results: []});
 		})
 	}else{
 		// will have to trigger an alert or something to tell user here
@@ -50,4 +50,22 @@ exports.delete_all = function(req, res){
 			console.log("Unable to delete rooms");
 		res.redirect('/room_index');
 	});
+};
+
+
+// YELP API STUFF -- move this
+var yelp = require('yelp').createClient({
+    consumer_key: "ca1j3morADtYi7GuPQqCVw", 
+    consumer_secret: "k66LjcYeg0sx0LllxTbxFZIMx-c", 
+    token: "VLNXKCcKEaI_8vaPwxbeQd29Mk6u-ZB4", 
+    token_secret: "cKYBsPFXH4S7Y8fG-eTOhd6P07o"
+  });
+
+// display a user's Yelp results for their search
+exports.display_yelp_results = function(req, res){
+	yelp.search({term: "food", location: "Montreal"}, function(error, data) {
+  		if(error)
+  			console.log("Error in pulling Yelp results", error);
+  		res.render('_yelp_results', {yelp_results: ["1", "2"]});
+  });
 };
