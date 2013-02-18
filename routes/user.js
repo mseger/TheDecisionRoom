@@ -39,3 +39,26 @@ exports.delete_all = function(req, res){
    		res.redirect('/');
 	});
 };
+
+// YELP API STUFF -- move this
+var yelp = require('yelp').createClient({
+    consumer_key: "ca1j3morADtYi7GuPQqCVw", 
+    consumer_secret: "k66LjcYeg0sx0LllxTbxFZIMx-c", 
+    token: "VLNXKCcKEaI_8vaPwxbeQd29Mk6u-ZB4", 
+    token_secret: "cKYBsPFXH4S7Y8fG-eTOhd6P07o"
+  });
+
+// display a user's Yelp results for their search
+exports.display_yelp_results = function(req, res){
+	yelp.search({term: "food", location: "Montreal"}, function(error, data) {
+  	console.log(error);
+  	console.log(data);
+  });
+};
+
+
+
+
+
+
+
