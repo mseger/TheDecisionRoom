@@ -1,36 +1,42 @@
 extends layout
 
 block content
-  div(value=curr_user, id="welcome-dialog")
-    style body {background-color: #{curr_user.profileBackground}}
-    h1 Welcome to TheDecisionRoom
-    b #{curr_user.name}
-    br
-    br
-    img(src="#{curr_user.profPicURL}", id="profPic")
-    form(name="logout-form", action="/logout", method="post")
-      input(type="submit", value="Log out of Account")
-    form(name="create-room-form", action="/room/new", method="post")
-         | Room name
-         br
-         input(type="text", name="room_name")
-         br
-         | Valid for
-         br
-         input(type="text", name="valid_for")
-         br
-         | Locked Group
-         input(type="checkbox", name="locked")
-         br
-         input(type="submit", value="Create new Room")
+  div.row
+      div.span4(value=curr_user, id="welcome-dialog")
+        h1 Welcome to TheDecisionRoom
+        b #{curr_user.name}
+        br
+        br
+        img(src="#{curr_user.profPicURL}", id="profPic")
+        br
+        form(name="logout-form", action="/logout", method="post")
+          input(type="submit", value="Log out of Account")
+        form(name="create-room-form", action="/room/new", method="post")
+             | Room name
+             br
+             input(type="text", name="room_name")
+             br
+             | Valid for
+             br
+             input(type="text", name="valid_for")
+             br
+             | Locked Group
+             input(type="checkbox", name="locked")
+             br
+             input(type="submit", value="Create new Room")
 
-    div(id="room-list")
-        each room, i in rooms
-            div(value=room, id="room_id")
-                b #{room.name}
-                br 
-                | #{room.clock}
-                | #{room.locked}
-                | #{room.room_inhabitants}
-                each inhabitant, i in room.room_inhabitants
-                    li #{room.room_inhabitants[i].name}
+      div.span4.offset2(id="room-list")
+            h2 Relevant Rooms
+            each room, i in rooms
+                div(value=room, id="room_id")
+                    b #{room.name}
+                    br 
+                    | #{room.clock}
+                    | #{room.locked}
+                    | #{room.room_inhabitants}
+                    each inhabitant, i in room.room_inhabitants
+                        li #{room.room_inhabitants[i].name}
+                    form(name="go-to-room", action="/room/" + room._id, method="get")
+                        input(type="submit", value="Go to Room")
+                    br
+                    br
