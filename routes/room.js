@@ -63,7 +63,9 @@ var yelp = require('yelp').createClient({
 
 // display a user's Yelp results for their search
 exports.display_yelp_results = function(req, res){
-	yelp.search({term: "food", location: "Montreal"}, function(error, data) {
+	console.log("THE CATEGORY IS: ", req.body.category);
+	console.log("THE CITY IS: ", req.body.city);
+	yelp.search({term: req.body.category, location: req.body.city}, function(error, data) {
   		if(error)
   			console.log("Error in pulling Yelp results", error);
   		res.render('_yelp_results', {yelp_results: ["1", "2"]});
