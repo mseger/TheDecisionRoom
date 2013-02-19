@@ -52,7 +52,7 @@ app.post('/room/new', Facebook.loginRequired(), room.create);
 app.post('/room/:room_id/yelp', yelp.display_yelp_results);
 app.post('/room/:room_id/:yelp_id/vote-up', yelp.vote_listing_up);
 app.post('/room/:room_id/:yelp_id/vote-down', yelp.vote_listing_down);
-//app.post('/room/:room_id/:yelp_id/save', room.save_listing_to_room);
+app.post('/room/:room_id/:yelp_id/save', yelp.save_listing_to_room);
 
 
 http.createServer(app).listen(app.get('port'), function(){

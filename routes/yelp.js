@@ -1,3 +1,4 @@
+var Room = require('../models/room')
 var YelpResult = require('../models/yelp_result')
 
 // routes for all yelp-related functionality
@@ -66,5 +67,24 @@ exports.vote_listing_down = function(req, res){
 
 // save a given Yelp listing to 
 exports.save_listing_to_room = function(req, res){
-	var roomToSave
-}
+	console.log("The room id is: ", req.params.room_id);
+	var roomToSave = Room.findOne({_id: req.params.room_id}).exec(function (err, room){
+		if(err)
+			console.log("Couldn't find room to save listing to");
+		var listingToSave = YelpResult.findOne({_id: req.params.yelp_id}).exec(function (error, yelpListing){
+			if(error)
+				console.log("Error saving Yelp listing to current room");
+			// update the yelp saved listings to add the new one
+			var roomYelpListings = room.saved_yelp_listings;
+			roomYelpListings.push(yelpListing);
+			room.saved_yelp_listings = roomYelpListings;
+			room.save(function (err){
+				if(err)
+					console.log("Unable to update room with saved Yelp listing");
+				res.redirect('/room/' + req.params.room_id);
+			});
+		});
+	});
+};
+
+

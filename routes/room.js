@@ -54,8 +54,3 @@ exports.delete_all = function(req, res){
 };
 
 
-// save a given Yelp listing to 
-exports.save_listing_to_room = function(req, res){
-	var roomToSave
-}
-
