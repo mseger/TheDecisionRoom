@@ -1,5 +1,6 @@
 var User = require('../models/user')
 var Room = require('../models/room')
+var YelpResult = require('../models/yelp_result')
 
 exports.main = function(req, res){
 	if(req.session.user !== null){
@@ -63,11 +64,19 @@ var yelp = require('yelp').createClient({
 
 // display a user's Yelp results for their search
 exports.display_yelp_results = function(req, res){
-	console.log("THE CATEGORY IS: ", req.body.category);
-	console.log("THE CITY IS: ", req.body.city);
 	yelp.search({term: req.body.category, location: req.body.city}, function(error, data) {
   		if(error)
   			console.log("Error in pulling Yelp results", error);
-  		res.render('_yelp_results', {yelp_results: ["1", "2"]});
+  		var yelpResults = [];
+  		for(var i=0; i<data.businesses.length; i++){
+  			var currBusiness = data.businesses[i];
+  			var newYelpResult = new YelpResult({name: currBusiness.name, image_url: currBusiness.image_url, business_url: currBusiness.url, rating_img_url: currBusiness.rating_img_url, snippet_img_url: currBusiness.snippet_img_url, snippet_text: currBusiness.snippet_text, yelp_id: currBusiness.yelp_id, is_closed: currBusiness.is_closed});
+  			yelpResults.push(newYelpResult);
+  			newYelpResult.save(function (err){
+  				if(err)
+  					console.log("Unable to save yelp result");
+  			});
+  		};
+  		res.render('_yelp_results', {yelp_results: yelpResults});
   });
 };
