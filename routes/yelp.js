@@ -25,7 +25,7 @@ exports.display_yelp_results = function(req, res){
   					console.log("Unable to save yelp result");
   			});
   		};
-  		res.render('_yelp_results', {yelp_results: yelpResults});
+  		res.render('_yelp_results', {yelp_results: yelpResults, curr_room: req.params.room_id});
   });
 };
 
@@ -39,6 +39,7 @@ exports.delete_all = function(req, res){
 	});
 };
 
+// upvote a listing
 exports.vote_listing_up = function(req, res){
 	var listingInQuestion = YelpResult.findOne({_id: req.params.yelp_id}).exec(function (err, listing){
 		listing.num_group_votes = listing.num_group_votes + 1;
@@ -49,3 +50,21 @@ exports.vote_listing_up = function(req, res){
 		});
 	});
 };
+
+// downvote a listing
+exports.vote_listing_down = function(req, res){
+	var listingInQuestion = YelpResult.findOne({_id: req.params.yelp_id}).exec(function (err, listing){
+		listing.num_group_votes = listing.num_group_votes - 1;
+		listing.save(function (err){
+			if(err)
+				console.log("Unable to downvote listing");
+			res.redirect('/room_index');
+		});
+	});
+};
+
+
+// save a given Yelp listing to 
+exports.save_listing_to_room = function(req, res){
+	var roomToSave
+}

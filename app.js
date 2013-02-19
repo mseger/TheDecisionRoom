@@ -42,16 +42,17 @@ app.get('/room_index', Facebook.loginRequired(), room.index);
 app.get('/room/:room_id', Facebook.loginRequired(), room.main);
 app.get('/users/delete_all', user.delete_all);
 app.get('/rooms/delete_all', Facebook.loginRequired(), room.delete_all);
-app.get('/yelp', yelp.display_yelp_results);
-app.get('/yelps/delete_all', yelp.delete_all);
+app.get('/room/:room_id/yelp', yelp.display_yelp_results);
+app.get('/room/:room_id/yelps/delete_all', yelp.delete_all);
 
 // POSTS
 app.post('/login', Facebook.loginRequired(), user.login);
 app.post('/logout', Facebook.loginRequired(), user.logout);
 app.post('/room/new', Facebook.loginRequired(), room.create);
-app.post('/yelp', yelp.display_yelp_results);
-app.post('/yelp/:yelp_id/vote-up', yelp.vote_listing_up);
-//app.post('/yelp/:yelp_id/vote-down', yelp.vote_listing_down);
+app.post('/room/:room_id/yelp', yelp.display_yelp_results);
+app.post('/room/:room_id/:yelp_id/vote-up', yelp.vote_listing_up);
+app.post('/room/:room_id/:yelp_id/vote-down', yelp.vote_listing_down);
+//app.post('/room/:room_id/:yelp_id/save', room.save_listing_to_room);
 
 
 http.createServer(app).listen(app.get('port'), function(){
