@@ -8,7 +8,8 @@ var YelpResultSchema = new Schema({
 	snippet_img_url: String, 
 	snippet_text: String, 	
 	yelp_id: Number, 
-	is_closed: Boolean
+	is_closed: Boolean,
+	num_group_votes: Number
 });
 
 var YelpResult = mongoose.model('YelpResult', YelpResultSchema);
