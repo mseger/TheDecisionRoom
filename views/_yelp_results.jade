@@ -5,11 +5,9 @@ each result, i in yelp_results
 		a(href="#{result.business_url}", target="_blank") Go to Yelp Business
 		img(src="#{result.rating_img_url}", id="rating-pic")
 		| #{result.snippet_text}
-		form(name="save-to-group", action="/room/" + "#{curr_room}" + "/" + result._id + "/save", method="post")
-			input(type="submit", value="Save to Group")
 		| Number of votes: #{result.num_group_votes}
-		form(name="thumbs-up", action="/room/"+ "#{curr_room}" + "/" + result._id + "/vote-up", method="post")
+		form(name="thumbs-up", action="/room/"+ "#{curr_room._id}" + "/" + result._id + "/vote-up", method="post")
 			input(type="submit", value="Vote Up")
-		form(name="thumbs-down", action="/room/" + "#{curr_room}" + "/" + result._id + "/vote-down", method="post")
+		form(name="thumbs-down", action="/room/" + "#{curr_room._id}" + "/" + result._id + "/vote-down", method="post")
 			input(type="submit", value="Vote Down")
 

@@ -26,7 +26,7 @@ exports.display_yelp_results = function(req, res){
   					console.log("Unable to save yelp result");
   			});
   		};
-  		res.render('_yelp_results', {yelp_results: yelpResults, curr_room: req.params.room_id});
+  		res.render('all_search_results', {yelp_results: yelpResults, curr_room: req.params.room_id});
   });
 };
 
@@ -40,26 +40,47 @@ exports.delete_all = function(req, res){
 	});
 };
 
-// upvote a listing
+// upvote a listing in a room 
 exports.vote_listing_up = function(req, res){
-	var listingInQuestion = YelpResult.findOne({_id: req.params.yelp_id}).exec(function (err, listing){
-		listing.num_group_votes = listing.num_group_votes + 1;
-		listing.save(function (err){
+	var roomToSave = Room.findOne({_id: req.params.room_id}).exec(function (err, room){
+		if(err)
+			console.log("Couldn't find room to upvote listing in");
+		for(var i=0; i< room.saved_yelp_listings.length; i++){
+			var roomYelpListing = room.saved_yelp_listings[i];
+			if(roomYelpListing._id == req.params.yelp_id){
+				roomYelpListing.num_group_votes = roomYelpListing.num_group_votes + 1;
+				room.saved_yelp_listings[i] = roomYelpListing;
+			};
+		};
+		room.markModified('saved_yelp_listings');
+		room.save(function (err){
 			if(err)
-				console.log("Unable to upvote listing");
-			res.redirect('/room_index');
+				console.log("Unable to upvote listing in room");
+			console.log("Num votes is: ", room.saved_yelp_listings[0].num_group_votes);
+			res.redirect('/room/' + room._id);
 		});
 	});
 };
 
+
 // downvote a listing
 exports.vote_listing_down = function(req, res){
-	var listingInQuestion = YelpResult.findOne({_id: req.params.yelp_id}).exec(function (err, listing){
-		listing.num_group_votes = listing.num_group_votes - 1;
-		listing.save(function (err){
+	var roomToSave = Room.findOne({_id: req.params.room_id}).exec(function (err, room){
+		if(err)
+			console.log("Couldn't find room to upvote listing in");
+		for(var i=0; i< room.saved_yelp_listings.length; i++){
+			var roomYelpListing = room.saved_yelp_listings[i];
+			if(roomYelpListing._id == req.params.yelp_id){
+				roomYelpListing.num_group_votes = roomYelpListing.num_group_votes - 1;
+				room.saved_yelp_listings[i] = roomYelpListing;
+			};
+		};
+		room.markModified('saved_yelp_listings');
+		room.save(function (err){
 			if(err)
-				console.log("Unable to downvote listing");
-			res.redirect('/room_index');
+				console.log("Unable to upvote listing in room");
+			console.log("Num votes is: ", room.saved_yelp_listings[0].num_group_votes);
+			res.redirect('/room/' + room._id);
 		});
 	});
 };

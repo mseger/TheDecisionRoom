@@ -1,0 +1,10 @@
+each result, i in yelp_results
+	div.row(value=result._id)
+		h2 #{result.name}
+		img(src="#{result.image_url}", id="business-pic")
+		a(href="#{result.business_url}", target="_blank") Go to Yelp Business
+		img(src="#{result.rating_img_url}", id="rating-pic")
+		| #{result.snippet_text}
+		form(name="save-to-group", action="/room/" + "#{curr_room}" + "/" + result._id + "/save", method="post")
+			input(type="submit", value="Save to Group")
+	
