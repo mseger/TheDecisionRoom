@@ -3,19 +3,26 @@ extends layout
 block content
 	div.row
 		div.span6(value= curr_room, id="welcome-to-room-dialog")
-			h1 Welcome to #{curr_room.name}
+			h1(id="welcome-room-title") #{curr_room.name}
 			br
 			br
-			form(name="logout-form", action="/logout", method="post")
-				input(type="submit", value="Log out of Account")
+		form(name="logout-form", action="/logout", method="post")
+				button.btn(type="submit", id="room-logout-button")
+					i.icon-cog
+					| Log out
+	div.row
 		div.span6(id="yelp-search")
 			form(name="yelp-criteria", action="/room/" + curr_room._id + "/yelp", method="post")
-				| Search for 
+				h3 Search for 
 				label Category: 
 				input(type="text", name="category")
 				label City: 
 				input(type="text", name="city")
 				input(type="submit", value="Submit")
+		div.span8(id="explanatory-text")
+			h3 Invite your friends, everyone searches for what they want to eat or do, adds their picks to the room, casts their vote, and voila! It's like those plans just made themselves. Piece of cake, right?
 
 
 		include _yelp_results
+
+

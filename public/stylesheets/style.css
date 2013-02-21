@@ -35,3 +35,15 @@ a {
 #go-to-room-button{
 	margin-top: 10px;
 }
+
+/* ROOM styles */
+
+#welcome-room-title{
+	color: #9D1309;
+	padding-bottom: 20px;
+}
+
+#room-logout-button{
+	margin-top: 10px;
+	float:right;
+}
