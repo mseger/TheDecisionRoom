@@ -47,3 +47,13 @@ a {
 	margin-top: 10px;
 	float:right;
 }
+
+#yelp-search-submit{
+	margin-left: 10px;
+}
+
+/* _YELP_RESULTS partial styles */
+
+#yelp-business-link{
+	margin-left: 10px;
+}

@@ -1,14 +1,21 @@
 each result, i in yelp_results
 	div.row(value=result._id)
-		div.span10.offset6
+		div.span8.offset6
 			h2 #{result.name}
 			img(src="#{result.image_url}", id="business-pic")
-			a(href="#{result.business_url}", target="_blank") Go to Yelp Business
+			a(href="#{result.business_url}", target="_blank", id="yelp-business-link") Go to Yelp Page
+			br
 			img(src="#{result.rating_img_url}", id="rating-pic")
+			br
 			| #{result.snippet_text}
-			| Number of votes: #{result.num_group_votes}
+			br
+			h4 Number of votes: #{result.num_group_votes}
+				
 			form(name="thumbs-up", action="/room/"+ "#{curr_room._id}" + "/" + result._id + "/vote-up", method="post")
-				input(type="submit", value="Vote Up")
+				button.btn(type="submit", id="vote-up-button")
+					i.icon-thumbs-up
+					|  Vote up 
 			form(name="thumbs-down", action="/room/" + "#{curr_room._id}" + "/" + result._id + "/vote-down", method="post")
-				input(type="submit", value="Vote Down")
-
+				button.btn(type="submit", id="vote-down-button")
+					i.icon-thumbs-down
+					|  Vote down
