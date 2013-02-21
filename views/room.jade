@@ -2,7 +2,7 @@ extends layout
 
 block content
 	div.row
-		div.span6(value= curr_room, id="welcome-to-room-dialog")
+		div.span6.offset1(value= curr_room, id="welcome-to-room-dialog")
 			h1(id="welcome-room-title") #{curr_room.name}
 			br
 			br
@@ -11,7 +11,7 @@ block content
 					i.icon-cog
 					| Log out
 	div.row
-		div.span6(id="yelp-search")
+		div.span5.offset1(id="yelp-search")
 			form(name="yelp-criteria", action="/room/" + curr_room._id + "/yelp", method="post")
 				h3 Search for 
 				label Category: 
