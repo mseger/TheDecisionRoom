@@ -1,6 +1,7 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-image: url('/images/linedpaper.png');
 }
 
 a {
@@ -9,3 +10,24 @@ a {
 
 
 /* ROOM_INDEX styles */
+
+#inhabitant-profPic{
+	width:50px;
+}
+
+#welcome-title{
+	color: #9D1309;
+	padding-bottom: 20px;
+}
+
+#create-room{
+	padding-top: 130px;
+}
+
+#room-list{
+	padding-top: 130px;
+}
+
+#logout-button{
+	margin-top: 10px;
+}
