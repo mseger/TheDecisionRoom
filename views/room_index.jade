@@ -15,7 +15,7 @@ block content
                     |  Log out
         
         div.span6.offset1(id="room-list")
-            h2 Relevant Rooms
+            h2 Relevant Rooms to You
             each room, i in rooms
                 div(value=room, id="room_id")
                     h4 #{room.name}
@@ -27,13 +27,13 @@ block content
                         li #{inhabitant.name}
                         img(src="#{inhabitant.profPicURL}", id="inhabitant-profPic")
                     form(name="go-to-room", action="/room/" + room._id, method="get")
-                        button.btn(type="submit")
+                        button.btn(type="submit", id="go-to-room-button")
                             i.icon-arrow-right
                             |  Go to Room
                     br
                     br
         
-        div.span4(id="create-room")
+        div.span4.offset1(id="create-room")
             h2 Create a New Room
             form(name="create-room-form", action="/room/new", method="post")
                  | Room name
