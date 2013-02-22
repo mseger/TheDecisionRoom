@@ -8,6 +8,24 @@ a {
   color: #00B7FF;
 }
 
+/* LOGIN styles */
+
+#site-title{
+	color: #9D1309;
+}
+
+#login-submit{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 20px;
+}
+
+#marketing-pic{
+	width:500px;
+	border: 10px #9D1309;
+	border-radius: 10px;
+}
 
 /* ROOM_INDEX styles */
 
@@ -56,4 +74,8 @@ a {
 
 #yelp-business-link{
 	margin-left: 10px;
+}
+
+#room-yelp-result{
+	margin-left: 5px;
 }

@@ -19,12 +19,9 @@ block content
             each room, i in rooms
                 div(value=room, id="room_id")
                     h4 #{room.name}
-                    br 
-                    | #{room.clock}
-                    | #{room.locked}
-                    | #{room.room_inhabitants}
+                    | Valid for #{room.clock} hours
+                    br
                     each inhabitant, i in room.room_inhabitants
-                        li #{inhabitant.name}
                         img(src="#{inhabitant.profPicURL}", id="inhabitant-profPic")
                     form(name="go-to-room", action="/room/" + room._id, method="get")
                         button.btn(type="submit", id="go-to-room-button")
@@ -44,7 +41,7 @@ block content
                  br
                  input(type="text", name="valid_for")
                  br
-                 | Locked Group
+                 | Locked Group 
                  input(type="checkbox", name="locked")
                  br
                  br

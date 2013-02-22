@@ -1,5 +1,5 @@
 each result, i in yelp_results
-	div.row(value=result._id)
+	div.row(value=result._id, id="room-yelp-result")
 		div.span8.offset6
 			h2 #{result.name}
 			img(src="#{result.image_url}", id="business-pic")
@@ -10,7 +10,7 @@ each result, i in yelp_results
 			| #{result.snippet_text}
 			br
 			h4 Number of votes: #{result.num_group_votes}
-				
+
 			form(name="thumbs-up", action="/room/"+ "#{curr_room._id}" + "/" + result._id + "/vote-up", method="post")
 				button.btn(type="submit", id="vote-up-button")
 					i.icon-thumbs-up

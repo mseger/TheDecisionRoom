@@ -1,5 +1,17 @@
 extends layout
 
 block content
-	form(name="fb-login", action="/login", method="post")
-		input(type="submit", value="Login with Facebook")
+	div.span6.offset2
+		img(src="https://sphotos-b.xx.fbcdn.net/hphotos-prn1/421804_4523335083476_205270249_n.jpg", id="marketing-pic")
+	
+	div.span6
+		h1(id="site-title") The Decision Room 
+
+	div.span6(id="marketing-text")
+		h3 Ever have trouble reconciling everyone's plans for the night? Not anymore! Just grab your friends, throw them in a Decision Room, and go do epic shit!
+	
+	div.span5
+		form(name="fb-login", action="/login", method="post")
+			button.btn(type="submit", id="login-submit")
+				i.icon-user
+				h4 Login with Facebook 
