@@ -26,7 +26,7 @@ exports.display_yelp_results = function(req, res){
   					console.log("Unable to save yelp result");
   			});
   		};
-  		res.render('all_search_results', {yelp_results: yelpResults, curr_room: req.params.room_id});
+  		res.render('all_search_results', {title: "Yelp Results", yelp_results: yelpResults, curr_room: req.params.room_id});
   });
 };
 

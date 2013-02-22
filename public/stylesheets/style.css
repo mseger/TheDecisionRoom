@@ -11,6 +11,7 @@ a {
 /* LOGIN styles */
 
 #site-title{
+	margin-top: 50px;
 	color: #9D1309;
 }
 
@@ -78,4 +79,10 @@ a {
 
 #room-yelp-result{
 	margin-left: 5px;
+}
+
+/* ALL_SEARCH_RESULTS styles */
+
+#candidate-result-title{
+	color: #9D1309;
 }
